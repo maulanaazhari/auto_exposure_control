@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 
 <launch>
-  <arg name="camera_name" default="/pg_15508253"/>
-  <arg name="camera_topic" default="/pg_15508253/image_raw"/>
+  <arg name="wait_down_camera" default="false"/>
+  <arg name="max_exp" default="10000"/>
+  <arg name="min_exp" default="75"/>
   
-  <node name="auto_exposure_control" pkg="auto_exposure_control" type="auto_exposure_control.py" respawn="true">
-    <param name="camera_name" type="string" value="$(arg camera_name)"/>
-    <remap from="image_raw" to="$(arg camera_topic)"/>
+  <node name="auto_exposure_control" pkg="auto_exposure_control" type="auto_exposure_control.py" respawn="false" output="screen">
+    <param name="wait_down_camera" type="bool" value="$(arg wait_down_camera)"/>
+    <param name="max_exp" type="int" value="$(arg max_exp)"/>
+    <param name="min_exp" type="int" value="$(arg min_exp)"/>
   </node>
   
 </launch>
